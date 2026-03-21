@@ -213,4 +213,23 @@ export const getAuditStats = () => api.get('/audits/stats');
 // ===== Document Stats =====
 export const getDocumentStats = () => api.get('/documents/stats');
 
+// ===== SuperAdmin =====
+export const getSuperAdminStats = () => api.get('/superadmin/stats');
+export const getSuperAdminUsers = (params) => api.get('/superadmin/users', { params });
+export const getSuperAdminUserDetail = (id) => api.get(`/superadmin/users/${id}`);
+export const updateSuperAdminUser = (id, data) => api.put(`/superadmin/users/${id}`, data);
+export const deleteSuperAdminUser = (id) => api.delete(`/superadmin/users/${id}`);
+export const impersonateUser = (id) => api.post(`/superadmin/users/${id}/impersonate`);
+export const getSuperAdminOrgs = (params) => api.get('/superadmin/organizations', { params });
+export const getSuperAdminOrgDetail = (id) => api.get(`/superadmin/organizations/${id}`);
+export const updateSuperAdminOrg = (id, data) => api.put(`/superadmin/organizations/${id}`, data);
+export const deleteSuperAdminOrg = (id) => api.delete(`/superadmin/organizations/${id}`);
+export const getSystemSettings = () => api.get('/superadmin/settings');
+export const updateSystemSetting = (data) => api.put('/superadmin/settings', data);
+export const getRevenueStats = () => api.get('/superadmin/revenue');
+export const getSuperAdminActivity = (params) => api.get('/superadmin/activity', { params });
+export const sendBulkEmail = (data) => api.post('/superadmin/bulk-email', data);
+export const toggleMaintenance = (data) => api.post('/superadmin/maintenance', data);
+export const getSystemHealth = () => api.get('/superadmin/health');
+
 export default api;

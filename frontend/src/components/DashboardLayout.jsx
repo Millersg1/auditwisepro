@@ -6,7 +6,7 @@ import {
   FiGrid, FiSearch, FiPlusCircle, FiSettings, FiShield,
   FiLogOut, FiMenu, FiX, FiChevronLeft, FiUsers, FiClipboard,
   FiFileText, FiAlertTriangle, FiCheckSquare, FiBarChart2,
-  FiFolder, FiEdit3, FiBell, FiUser
+  FiFolder, FiEdit3, FiBell, FiUser, FiZap, FiGlobe, FiDollarSign, FiTool
 } from 'react-icons/fi';
 import './DashboardLayout.css';
 
@@ -63,11 +63,25 @@ function DashboardLayout() {
   ];
 
   // Add admin section
-  if (user?.role === 'admin') {
+  if (user?.role === 'admin' || user?.role === 'superadmin') {
     navSections.push({
       label: 'Admin',
       items: [
         { to: '/admin', icon: <FiShield size={20} />, label: 'Admin Panel' },
+      ]
+    });
+  }
+
+  // Add superadmin section
+  if (user?.role === 'superadmin') {
+    navSections.push({
+      label: 'Super Admin',
+      items: [
+        { to: '/superadmin', icon: <FiZap size={20} />, label: 'System Overview' },
+        { to: '/superadmin/users', icon: <FiUsers size={20} />, label: 'All Users' },
+        { to: '/superadmin/organizations', icon: <FiGlobe size={20} />, label: 'Organizations' },
+        { to: '/superadmin/revenue', icon: <FiDollarSign size={20} />, label: 'Revenue' },
+        { to: '/superadmin/settings', icon: <FiTool size={20} />, label: 'System Settings' },
       ]
     });
   }

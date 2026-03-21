@@ -1,0 +1,140 @@
+/* ===== SuperAdmin Settings ===== */
+.sa-settings-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.sa-settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sa-settings-section {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.sa-settings-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Maintenance toggle */
+.sa-maintenance-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.sa-maintenance-toggle .sa-toggle {
+  flex-shrink: 0;
+}
+
+.sa-maintenance-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.sa-maintenance-info p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.sa-maintenance-warning {
+  padding: 12px 16px;
+  background: #fef3cd;
+  border: 1px solid #ffc107;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  color: #856404;
+}
+
+/* Settings rows */
+.sa-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sa-setting-row:last-child {
+  border-bottom: none;
+}
+
+.sa-setting-row label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.sa-setting-row input,
+.sa-setting-row select {
+  width: 200px;
+}
+
+/* Bulk email form */
+.sa-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sa-email-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.sa-email-preview {
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* System info */
+.sa-system-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sa-system-info-item {
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+
+.sa-system-info-item label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.sa-system-info-item span {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sa-settings-grid {
+    grid-template-columns: 1fr;
+  }
+}

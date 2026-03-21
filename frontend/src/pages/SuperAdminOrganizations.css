@@ -1,0 +1,83 @@
+/* ===== SuperAdmin Organizations ===== */
+.sa-orgs-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.sa-orgs-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sa-orgs-search {
+  position: relative;
+  flex: 1;
+}
+
+.sa-orgs-search .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+.sa-orgs-search .form-input {
+  padding-left: 40px;
+}
+
+.sa-orgs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sa-orgs-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.sa-orgs-table td {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.sa-orgs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sa-orgs-table tr:hover td {
+  background: var(--bg);
+}
+
+.sa-orgs-table tr.clickable {
+  cursor: pointer;
+}
+
+.sa-org-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sa-orgs-controls {
+    flex-direction: column;
+  }
+  .sa-orgs-table th:nth-child(3),
+  .sa-orgs-table td:nth-child(3),
+  .sa-orgs-table th:nth-child(4),
+  .sa-orgs-table td:nth-child(4) {
+    display: none;
+  }
+}

@@ -37,6 +37,14 @@ import BlogEditor from './pages/BlogEditor';
 import Notifications from './pages/Notifications';
 import Settings from './pages/Settings';
 
+// SuperAdmin pages
+import SuperAdminDashboard from './pages/SuperAdminDashboard';
+import SuperAdminUsers from './pages/SuperAdminUsers';
+import SuperAdminUserDetail from './pages/SuperAdminUserDetail';
+import SuperAdminOrganizations from './pages/SuperAdminOrganizations';
+import SuperAdminSettings from './pages/SuperAdminSettings';
+import SuperAdminRevenue from './pages/SuperAdminRevenue';
+
 function App() {
   return (
     <Routes>
@@ -82,6 +90,14 @@ function App() {
 
           {/* Notifications */}
           <Route path="/notifications" element={<Notifications />} />
+
+          {/* SuperAdmin */}
+          <Route path="/superadmin" element={<SuperAdminDashboard />} />
+          <Route path="/superadmin/users" element={<SuperAdminUsers />} />
+          <Route path="/superadmin/users/:id" element={<SuperAdminUserDetail />} />
+          <Route path="/superadmin/organizations" element={<SuperAdminOrganizations />} />
+          <Route path="/superadmin/settings" element={<SuperAdminSettings />} />
+          <Route path="/superadmin/revenue" element={<SuperAdminRevenue />} />
         </Route>
       </Route>
     </Routes>
