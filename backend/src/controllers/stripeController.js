@@ -1,13 +1,21 @@
 import Stripe from 'stripe';
 import pool from '../config/database.js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+let _stripe;
+function getStripe() {
+  if (!_stripe) {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  }
+  return _stripe;
+}
 
-const PLAN_PRICE_MAP = {
-  starter: process.env.STRIPE_STARTER_PRICE_ID || 'price_1TDUfmPatdzid7LW5Abl1cxs',
-  pro: process.env.STRIPE_PRO_PRICE_ID || 'price_1TDUfmPatdzid7LWCIcB02bO',
-  agency: process.env.STRIPE_AGENCY_PRICE_ID || 'price_1TDUfnPatdzid7LWzHB94ld0',
-};
+function getPriceMap() {
+  return {
+    starter: process.env.STRIPE_STARTER_PRICE_ID || 'price_1TDUfmPatdzid7LW5Abl1cxs',
+    pro: process.env.STRIPE_PRO_PRICE_ID || 'price_1TDUfmPatdzid7LWCIcB02bO',
+    agency: process.env.STRIPE_AGENCY_PRICE_ID || 'price_1TDUfnPatdzid7LWzHB94ld0',
+  };
+}
 
 const PLAN_SCAN_LIMITS = {
   free: 5,
@@ -18,7 +26,7 @@ const PLAN_SCAN_LIMITS = {
 
 // Map a Stripe price ID back to a plan name
 function priceToPlan(priceId) {
-  for (const [plan, pid] of Object.entries(PLAN_PRICE_MAP)) {
+  for (const [plan, pid] of Object.entries(getPriceMap())) {
     if (pid === priceId) return plan;
   }
   return null;
@@ -28,6 +36,8 @@ function priceToPlan(priceId) {
 export const createCheckoutSession = async (req, res) => {
   try {
     const { plan } = req.body;
+    const PLAN_PRICE_MAP = getPriceMap();
+    const stripe = getStripe();
     if (!plan || !PLAN_PRICE_MAP[plan]) {
       return res.status(400).json({ error: 'Invalid plan. Choose starter, pro, or agency.' });
     }
@@ -65,6 +75,7 @@ export const createCheckoutSession = async (req, res) => {
 // ── Create Billing Portal Session ────────────────────────────────────
 export const createBillingPortalSession = async (req, res) => {
   try {
+    const stripe = getStripe();
     const user = req.user;
     if (!user.stripe_customer_id) {
       return res.status(400).json({ error: 'No active subscription found' });
@@ -87,6 +98,7 @@ export const handleWebhook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
   let event;
 
+  const stripe = getStripe();
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
