@@ -58,7 +58,7 @@ function SuperAdminRevenue() {
   // Revenue by plan (stacked bar)
   const planMonths = data?.revenue_by_plan?.months || [];
   const planDatasets = data?.revenue_by_plan?.datasets || [];
-  const planColors = { free: '#718096', starter: '#3182ce', pro: '#38b2ac', agency: '#1a365d' };
+  const planColors = { free: '#718096', starter: '#1E90FF', pro: '#00C9A7', agency: '#0B1F3A' };
 
   const stackedBarData = {
     labels: planMonths.length ? planMonths : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -69,9 +69,9 @@ function SuperAdminRevenue() {
       borderRadius: 4,
     })) : [
       { label: 'Free', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#718096', borderRadius: 4 },
-      { label: 'Starter', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#3182ce', borderRadius: 4 },
-      { label: 'Pro', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#38b2ac', borderRadius: 4 },
-      { label: 'Agency', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#1a365d', borderRadius: 4 },
+      { label: 'Starter', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#1E90FF', borderRadius: 4 },
+      { label: 'Pro', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#00C9A7', borderRadius: 4 },
+      { label: 'Agency', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: '#0B1F3A', borderRadius: 4 },
     ],
   };
 
@@ -83,12 +83,12 @@ function SuperAdminRevenue() {
     datasets: [{
       label: 'Revenue',
       data: trendValues,
-      borderColor: '#38b2ac',
+      borderColor: '#00C9A7',
       backgroundColor: 'rgba(56, 178, 172, 0.1)',
       fill: true,
       tension: 0.4,
       pointRadius: 3,
-      pointBackgroundColor: '#38b2ac',
+      pointBackgroundColor: '#00C9A7',
     }],
   };
 

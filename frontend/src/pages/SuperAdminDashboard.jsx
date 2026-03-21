@@ -101,7 +101,7 @@ function SuperAdminDashboard() {
     labels: planLabels,
     datasets: [{
       data: planValues,
-      backgroundColor: ['#718096','#3182ce','#38b2ac','#1a365d'],
+      backgroundColor: ['#718096','#1E90FF','#00C9A7','#0B1F3A'],
       borderWidth: 0,
     }],
   };
