@@ -1,0 +1,85 @@
+.settings-page {
+  max-width: 700px;
+}
+
+.settings-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.settings-plan {
+  margin-bottom: 24px;
+  padding: 20px 24px;
+}
+
+.plan-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.plan-info svg {
+  color: var(--accent);
+}
+
+.plan-info strong {
+  display: block;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.plan-info p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.plan-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.plan-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+  padding: 28px;
+}
+
+.settings-section h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.settings-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.settings-form-grid .form-group:only-child,
+.settings-form-grid .form-group:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .settings-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-section {
+    padding: 20px;
+  }
+}

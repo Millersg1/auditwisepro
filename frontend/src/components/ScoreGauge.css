@@ -1,0 +1,43 @@
+.score-gauge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-gauge svg {
+  display: block;
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: var(--border);
+}
+
+.gauge-fill {
+  fill: none;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.gauge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-score {
+  font-weight: 800;
+  line-height: 1;
+}
+
+.gauge-label {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

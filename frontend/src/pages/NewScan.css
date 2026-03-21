@@ -1,0 +1,110 @@
+.new-scan-page {
+  max-width: 700px;
+}
+
+.new-scan-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.new-scan-desc {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.new-scan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.new-scan-input-wrap {
+  position: relative;
+}
+
+.new-scan-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+.new-scan-input {
+  padding-left: 48px;
+  font-size: 1.1rem;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.new-scan-form .btn {
+  align-self: flex-start;
+}
+
+/* Recent Scans */
+.recent-scans h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  transition: var(--transition);
+}
+
+.recent-item:hover {
+  transform: translateX(4px);
+}
+
+.recent-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.recent-url {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-date {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.recent-arrow {
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .new-scan-form {
+    padding: 20px;
+  }
+
+  .new-scan-form .btn {
+    width: 100%;
+  }
+}
