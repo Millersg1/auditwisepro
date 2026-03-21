@@ -9,8 +9,12 @@ import authRoutes from './routes/authRoutes.js';
 import scanRoutes from './routes/scanRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import stripeRoutes from './routes/stripeRoutes.js';
 
 const app = express();
+
+// Stripe webhook needs raw body – mount BEFORE json parser
+app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }));
 
 // Security & utility middleware
 app.use(helmet());
@@ -33,6 +37,7 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/stripe', stripeRoutes);
 app.use('/api/scans', scanRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/contact', contactRoutes);

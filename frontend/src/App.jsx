@@ -13,6 +13,7 @@ import ScanResults from './pages/ScanResults';
 import NewScan from './pages/NewScan';
 import AccountSettings from './pages/AccountSettings';
 import AdminPanel from './pages/AdminPanel';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/new-scan" element={<NewScan />} />
           <Route path="/settings" element={<AccountSettings />} />
+          <Route path="/subscription/success" element={<SubscriptionSuccess />} />
           <Route path="/admin" element={<AdminPanel />} />
         </Route>
       </Route>

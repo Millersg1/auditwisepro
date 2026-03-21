@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { FiUser, FiMail, FiBriefcase, FiSave, FiLock, FiShield } from 'react-icons/fi';
+import { FiUser, FiMail, FiBriefcase, FiSave, FiLock, FiShield, FiArrowRight, FiCreditCard, FiLoader } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
-import { updateProfile, changePassword } from '../services/api';
+import { updateProfile, changePassword, createCheckoutSession, createBillingPortal } from '../services/api';
 import './AccountSettings.css';
 
 function AccountSettings() {
@@ -19,6 +19,35 @@ function AccountSettings() {
   });
   const [savingProfile, setSavingProfile] = useState(false);
   const [savingPassword, setSavingPassword] = useState(false);
+  const [subscribingPlan, setSubscribingPlan] = useState(null);
+  const [managingBilling, setManagingBilling] = useState(false);
+
+  const currentPlan = (user?.plan || 'free').toLowerCase();
+  const isPaidPlan = currentPlan !== 'free';
+
+  const handleSubscribe = async (plan) => {
+    setSubscribingPlan(plan);
+    try {
+      const res = await createCheckoutSession(plan);
+      window.location.href = res.data.url;
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to start checkout');
+    } finally {
+      setSubscribingPlan(null);
+    }
+  };
+
+  const handleManageBilling = async () => {
+    setManagingBilling(true);
+    try {
+      const res = await createBillingPortal();
+      window.location.href = res.data.url;
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to open billing portal');
+    } finally {
+      setManagingBilling(false);
+    }
+  };
 
   const handleProfileChange = (e) => setProfileForm({ ...profileForm, [e.target.name]: e.target.value });
   const handlePasswordChange = (e) => setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
@@ -74,21 +103,75 @@ function AccountSettings() {
     <div className="settings-page">
       <h1>Account Settings</h1>
 
-      {/* Plan Info */}
-      <div className="settings-plan card">
+      {/* Subscription */}
+      <div className="settings-section card">
+        <h2><FiCreditCard style={{ marginRight: 8, verticalAlign: 'middle' }} /> Subscription</h2>
+
         <div className="plan-info">
           <FiShield size={20} />
           <div>
             <strong>Current Plan: {user?.plan || 'Free'}</strong>
-            <p>{user?.scans_used || 0} / {user?.scans_limit || 5} scans used this month</p>
+            {user?.subscription_status && user.subscription_status !== 'none' && (
+              <span className={`plan-status plan-status-${user.subscription_status}`}>
+                {user.subscription_status}
+              </span>
+            )}
           </div>
         </div>
-        <div className="plan-bar">
-          <div
-            className="plan-bar-fill"
-            style={{ width: `${Math.min(100, ((user?.scans_used || 0) / (user?.scans_limit || 5)) * 100)}%` }}
-          />
+
+        <div className="scan-usage">
+          <div className="scan-usage-text">
+            <span>{user?.scans_used || 0} of {user?.scans_limit || 5} scans used this month</span>
+            <span className="scan-usage-pct">
+              {Math.round(((user?.scans_used || 0) / (user?.scans_limit || 5)) * 100)}%
+            </span>
+          </div>
+          <div className="plan-bar">
+            <div
+              className="plan-bar-fill"
+              style={{ width: `${Math.min(100, ((user?.scans_used || 0) / (user?.scans_limit || 5)) * 100)}%` }}
+            />
+          </div>
         </div>
+
+        {isPaidPlan ? (
+          <button
+            className="btn btn-primary"
+            onClick={handleManageBilling}
+            disabled={managingBilling}
+            style={{ marginTop: 16 }}
+          >
+            {managingBilling ? (
+              <><FiLoader className="spin-icon" /> Opening Portal...</>
+            ) : (
+              <><FiCreditCard /> Manage Subscription</>
+            )}
+          </button>
+        ) : (
+          <div className="upgrade-options">
+            <p className="upgrade-label">Upgrade your plan:</p>
+            <div className="upgrade-buttons">
+              {[
+                { plan: 'starter', label: 'Starter - $29/mo' },
+                { plan: 'pro', label: 'Pro - $79/mo' },
+                { plan: 'agency', label: 'Agency - $199/mo' },
+              ].map(({ plan, label }) => (
+                <button
+                  key={plan}
+                  className="btn btn-accent btn-sm"
+                  onClick={() => handleSubscribe(plan)}
+                  disabled={subscribingPlan === plan}
+                >
+                  {subscribingPlan === plan ? (
+                    <><FiLoader className="spin-icon" /> Processing...</>
+                  ) : (
+                    <>{label} <FiArrowRight /></>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Profile */}

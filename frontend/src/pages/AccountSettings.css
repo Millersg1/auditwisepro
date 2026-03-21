@@ -50,6 +50,80 @@
   transition: width 0.5s ease;
 }
 
+/* ===== Subscription Section ===== */
+.plan-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.plan-status-active {
+  background: rgba(56, 161, 105, 0.15);
+  color: #38a169;
+}
+
+.plan-status-trialing {
+  background: rgba(49, 130, 206, 0.15);
+  color: #3182ce;
+}
+
+.plan-status-past_due {
+  background: rgba(221, 107, 32, 0.15);
+  color: #dd6b20;
+}
+
+.plan-status-canceled {
+  background: rgba(229, 62, 62, 0.15);
+  color: #e53e3e;
+}
+
+.scan-usage {
+  margin: 16px 0 0;
+}
+
+.scan-usage-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.scan-usage-pct {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upgrade-options {
+  margin-top: 16px;
+}
+
+.upgrade-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.upgrade-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .settings-section {
   margin-bottom: 24px;
   padding: 28px;

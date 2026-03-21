@@ -4,15 +4,35 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import {
   FiSearch, FiShield, FiZap, FiEye, FiArrowRight,
-  FiCheck, FiGlobe, FiLock, FiTrendingUp
+  FiCheck, FiGlobe, FiLock, FiTrendingUp, FiLoader
 } from 'react-icons/fi';
-import { createScan } from '../services/api';
+import { createScan, createCheckoutSession } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import './LandingPage.css';
 
 function LandingPage() {
   const [url, setUrl] = useState('');
   const [scanning, setScanning] = useState(false);
+  const [subscribingPlan, setSubscribingPlan] = useState(null);
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleSubscribe = async (plan) => {
+    if (!user) {
+      toast.info('Please create an account first');
+      navigate('/register');
+      return;
+    }
+    setSubscribingPlan(plan);
+    try {
+      const res = await createCheckoutSession(plan);
+      window.location.href = res.data.url;
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to start checkout. Please try again.');
+    } finally {
+      setSubscribingPlan(null);
+    }
+  };
 
   const handleScan = async (e) => {
     e.preventDefault();
@@ -254,37 +274,37 @@ function LandingPage() {
                 cta: 'Get Started',
                 ctaLink: '/register',
                 highlight: false,
-                comingSoon: false,
+                stripePlan: null,
               },
               {
                 name: 'Starter',
                 price: '$29',
                 period: '/month',
                 features: ['50 scans per month', 'PDF export', 'Email alerts', 'Scan history', 'Priority support'],
-                cta: 'Coming Soon',
+                cta: 'Subscribe',
                 ctaLink: null,
                 highlight: false,
-                comingSoon: true,
+                stripePlan: 'starter',
               },
               {
                 name: 'Pro',
                 price: '$79',
                 period: '/month',
                 features: ['200 scans per month', 'Scheduled scans', 'API access', 'Custom branding', 'Webhook notifications'],
-                cta: 'Coming Soon',
+                cta: 'Subscribe',
                 ctaLink: null,
                 highlight: true,
-                comingSoon: true,
+                stripePlan: 'pro',
               },
               {
                 name: 'Agency',
                 price: '$199',
                 period: '/month',
                 features: ['Unlimited scans', 'White-label reports', 'Team members', 'Priority queue', 'Dedicated support'],
-                cta: 'Coming Soon',
+                cta: 'Subscribe',
                 ctaLink: null,
                 highlight: false,
-                comingSoon: true,
+                stripePlan: 'agency',
               },
             ].map((plan, i) => (
               <motion.div
@@ -307,9 +327,17 @@ function LandingPage() {
                     <li key={j}><FiCheck className="pricing-check" /> {f}</li>
                   ))}
                 </ul>
-                {plan.comingSoon ? (
-                  <button className="btn btn-outline btn-lg pricing-btn" disabled>
-                    Coming Soon
+                {plan.stripePlan ? (
+                  <button
+                    className="btn btn-accent btn-lg pricing-btn"
+                    onClick={() => handleSubscribe(plan.stripePlan)}
+                    disabled={subscribingPlan === plan.stripePlan}
+                  >
+                    {subscribingPlan === plan.stripePlan ? (
+                      <><FiLoader className="spin-icon" /> Processing...</>
+                    ) : (
+                      <>{plan.cta} <FiArrowRight /></>
+                    )}
                   </button>
                 ) : (
                   <Link to={plan.ctaLink} className="btn btn-accent btn-lg pricing-btn">

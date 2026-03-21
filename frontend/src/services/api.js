@@ -58,6 +58,10 @@ export const getPublicScan = (id) => api.get(`/scans/public/${id}`);
 export const deleteScan = (id) => api.delete(`/scans/${id}`);
 export const downloadPDF = (id) => api.get(`/scans/${id}/pdf`, { responseType: 'blob' });
 
+// ===== Stripe =====
+export const createCheckoutSession = (plan) => api.post('/stripe/create-checkout-session', { plan });
+export const createBillingPortal = () => api.post('/stripe/create-billing-portal');
+
 // ===== Contact =====
 export const submitContact = (data) => api.post('/contact', data);
 
