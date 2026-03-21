@@ -10,6 +10,19 @@ import scanRoutes from './routes/scanRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import stripeRoutes from './routes/stripeRoutes.js';
+import clientRoutes from './routes/clientRoutes.js';
+import auditRoutes from './routes/auditRoutes.js';
+import templateRoutes from './routes/templateRoutes.js';
+import riskRoutes from './routes/riskRoutes.js';
+import complianceRoutes from './routes/complianceRoutes.js';
+import documentRoutes from './routes/documentRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import organizationRoutes from './routes/organizationRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
+import auditLogRoutes from './routes/auditLogRoutes.js';
+import userProfileRoutes from './routes/userProfileRoutes.js';
 
 const app = express();
 
@@ -41,6 +54,19 @@ app.use('/api/stripe', stripeRoutes);
 app.use('/api/scans', scanRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/audits', auditRoutes);
+app.use('/api/templates', templateRoutes);
+app.use('/api/risks', riskRoutes);
+app.use('/api/compliance', complianceRoutes);
+app.use('/api/documents', documentRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/organization', organizationRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/activity', auditLogRoutes);
+app.use('/api/profile', userProfileRoutes);
 
 // 404
 app.use((req, res) => {

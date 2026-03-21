@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import NotificationBell from './NotificationBell';
 import {
   FiGrid, FiSearch, FiPlusCircle, FiSettings, FiShield,
-  FiLogOut, FiMenu, FiX, FiChevronLeft
+  FiLogOut, FiMenu, FiX, FiChevronLeft, FiUsers, FiClipboard,
+  FiFileText, FiAlertTriangle, FiCheckSquare, FiBarChart2,
+  FiFolder, FiEdit3, FiBell, FiUser
 } from 'react-icons/fi';
 import './DashboardLayout.css';
 
@@ -18,14 +21,55 @@ function DashboardLayout() {
     navigate('/');
   };
 
-  const navItems = [
-    { to: '/dashboard', icon: <FiGrid size={20} />, label: 'Dashboard' },
-    { to: '/new-scan', icon: <FiPlusCircle size={20} />, label: 'New Scan' },
-    { to: '/settings', icon: <FiSettings size={20} />, label: 'Settings' },
+  const navSections = [
+    {
+      label: 'Overview',
+      items: [
+        { to: '/dashboard', icon: <FiGrid size={20} />, label: 'Dashboard' },
+        { to: '/new-scan', icon: <FiSearch size={20} />, label: 'Website Scan' },
+      ]
+    },
+    {
+      label: 'Audit Management',
+      items: [
+        { to: '/clients', icon: <FiUsers size={20} />, label: 'Clients' },
+        { to: '/audits', icon: <FiClipboard size={20} />, label: 'Audits' },
+        { to: '/templates', icon: <FiFileText size={20} />, label: 'Templates' },
+      ]
+    },
+    {
+      label: 'Analysis',
+      items: [
+        { to: '/risks', icon: <FiAlertTriangle size={20} />, label: 'Risk Assessment' },
+        { to: '/compliance', icon: <FiCheckSquare size={20} />, label: 'Compliance' },
+        { to: '/reports', icon: <FiBarChart2 size={20} />, label: 'Reports' },
+      ]
+    },
+    {
+      label: 'Resources',
+      items: [
+        { to: '/documents', icon: <FiFolder size={20} />, label: 'Documents' },
+        { to: '/blog', icon: <FiEdit3 size={20} />, label: 'Blog' },
+      ]
+    },
+    {
+      label: 'Account',
+      items: [
+        { to: '/notifications', icon: <FiBell size={20} />, label: 'Notifications' },
+        { to: '/account', icon: <FiUser size={20} />, label: 'Account' },
+        { to: '/settings', icon: <FiSettings size={20} />, label: 'Subscription' },
+      ]
+    },
   ];
 
+  // Add admin section
   if (user?.role === 'admin') {
-    navItems.push({ to: '/admin', icon: <FiShield size={20} />, label: 'Admin' });
+    navSections.push({
+      label: 'Admin',
+      items: [
+        { to: '/admin', icon: <FiShield size={20} />, label: 'Admin Panel' },
+      ]
+    });
   }
 
   return (
@@ -46,17 +90,22 @@ function DashboardLayout() {
         </div>
 
         <nav className="sidebar-nav">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileOpen(false)}
-              title={collapsed ? item.label : undefined}
-            >
-              {item.icon}
-              {!collapsed && <span>{item.label}</span>}
-            </NavLink>
+          {navSections.map((section) => (
+            <div key={section.label} className="sidebar-section">
+              {!collapsed && <span className="sidebar-section-label">{section.label}</span>}
+              {section.items.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+                  onClick={() => setMobileOpen(false)}
+                  title={collapsed ? item.label : undefined}
+                >
+                  {item.icon}
+                  {!collapsed && <span>{item.label}</span>}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
 
@@ -75,6 +124,7 @@ function DashboardLayout() {
             <FiMenu size={22} />
           </button>
           <div className="topbar-spacer" />
+          <NotificationBell />
           <div className="topbar-user">
             <div className="topbar-avatar">
               {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
