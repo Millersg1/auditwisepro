@@ -5,6 +5,7 @@ module.exports = {
       script: './server.js',
       node_args: '--env-file=.env',
       instances: 1,
+      exec_mode: 'fork',
       autorestart: true,
       watch: false,
       max_memory_restart: '512M',
