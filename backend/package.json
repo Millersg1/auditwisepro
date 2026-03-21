@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "migrate": "node src/config/runMigrations.js"
+    "migrate": "node --env-file=.env src/config/runMigrations.js"
   },
   "dependencies": {
     "axios": "^1.7.9",
