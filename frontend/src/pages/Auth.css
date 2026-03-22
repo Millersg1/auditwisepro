@@ -41,15 +41,17 @@
 
 .input-icon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-light);
-  font-size: 1rem;
+  color: var(--accent);
+  font-size: 1.1rem;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .form-input-icon {
-  padding-left: 42px;
+  padding-left: 48px !important;
 }
 
 .form-row {
