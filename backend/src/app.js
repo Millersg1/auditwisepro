@@ -27,6 +27,9 @@ import userProfileRoutes from './routes/userProfileRoutes.js';
 
 const app = express();
 
+// Trust proxy (behind Apache/nginx reverse proxy)
+app.set('trust proxy', 1);
+
 // Stripe webhook needs raw body – mount BEFORE json parser
 app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }));
 
