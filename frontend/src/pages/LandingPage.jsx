@@ -72,81 +72,93 @@ function LandingPage() {
       {/* Hero */}
       <section className="hero">
         <div className="hero-bg" />
-        <div className="container hero-content">
-          <motion.h1
-            className="hero-title"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-          >
-            Audit Your Website <br /><span className="hero-accent">in Seconds</span>
-          </motion.h1>
-
-          <motion.p
-            className="hero-subtitle"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={1}
-          >
-            Get instant insights on SEO, security, performance & accessibility.
-            <br />Free scan — no signup required.
-          </motion.p>
-
-          <motion.form
-            className="hero-form"
-            onSubmit={handleScan}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={2}
-          >
-            <div className="hero-input-wrap">
-              <FiGlobe className="hero-input-icon" />
-              <input
-                type="text"
-                className="hero-input"
-                placeholder="Enter your website URL (e.g. example.com)"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                disabled={scanning}
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn btn-accent btn-lg hero-btn"
-              disabled={scanning}
+        <div className="container hero-content hero-split">
+          <div className="hero-text">
+            <motion.h1
+              className="hero-title"
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
             >
-              {scanning ? (
-                <>
-                  <div className="spinner spinner-sm" style={{ borderTopColor: '#fff' }} />
-                  Scanning...
-                </>
-              ) : (
-                <>
-                  <FiSearch size={20} />
-                  Scan Now
-                </>
-              )}
-            </button>
-          </motion.form>
+              Audit Your Website <br /><span className="hero-accent">in Seconds</span>
+            </motion.h1>
+
+            <motion.p
+              className="hero-subtitle"
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={1}
+            >
+              Get instant insights on SEO, security, performance & accessibility.
+              <br />Free scan — no signup required.
+            </motion.p>
+
+            <motion.form
+              className="hero-form"
+              onSubmit={handleScan}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={2}
+            >
+              <div className="hero-input-wrap">
+                <FiGlobe className="hero-input-icon" />
+                <input
+                  type="text"
+                  className="hero-input"
+                  placeholder="Enter your website URL (e.g. example.com)"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  disabled={scanning}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-accent btn-lg hero-btn"
+                disabled={scanning}
+              >
+                {scanning ? (
+                  <>
+                    <div className="spinner spinner-sm" style={{ borderTopColor: '#fff' }} />
+                    Scanning...
+                  </>
+                ) : (
+                  <>
+                    <FiSearch size={20} />
+                    Scan Now
+                  </>
+                )}
+              </button>
+            </motion.form>
+
+            <motion.div
+              className="hero-trust"
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={3}
+            >
+              <div className="trust-item">
+                <FiCheck /> <span>10,000+ websites scanned</span>
+              </div>
+              <div className="trust-item">
+                <FiCheck /> <span>100% free basic scan</span>
+              </div>
+              <div className="trust-item">
+                <FiCheck /> <span>No signup required</span>
+              </div>
+            </motion.div>
+          </div>
 
           <motion.div
-            className="hero-trust"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={3}
+            className="hero-mascot"
+            initial={{ opacity: 0, scale: 0.8, x: 40 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
           >
-            <div className="trust-item">
-              <FiCheck /> <span>10,000+ websites scanned</span>
-            </div>
-            <div className="trust-item">
-              <FiCheck /> <span>100% free basic scan</span>
-            </div>
-            <div className="trust-item">
-              <FiCheck /> <span>No signup required</span>
-            </div>
+            <img src="/mascot.png" alt="AuditWise Pro Owl" className="hero-mascot-img" />
+            <div className="hero-mascot-glow" />
           </motion.div>
         </div>
       </section>
