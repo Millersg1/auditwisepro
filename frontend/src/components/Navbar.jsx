@@ -32,7 +32,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner container">
         <Link to="/" className="navbar-brand">
-          <span className="brand-icon">AW</span>
+          <img src="/logo.png" alt="AuditWise Pro" className="brand-logo" />
           <span className="brand-text">AuditWise Pro</span>
         </Link>
 

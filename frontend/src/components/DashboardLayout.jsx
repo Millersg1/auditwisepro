@@ -94,6 +94,7 @@ function DashboardLayout() {
       {/* Sidebar */}
       <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header">
+          <img src="/logo.png" alt="AuditWise Pro" className="sidebar-logo" />
           {!collapsed && <span className="sidebar-brand">AuditWise Pro</span>}
           <button className="sidebar-collapse-btn desktop-only" onClick={() => setCollapsed(!collapsed)}>
             <FiChevronLeft size={18} style={{ transform: collapsed ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
