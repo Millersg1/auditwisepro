@@ -32,9 +32,10 @@
 }
 
 .sidebar-logo {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
+  filter: brightness(1.6) drop-shadow(0 0 6px rgba(0, 201, 167, 0.4));
 }
 
 .sidebar-brand {
