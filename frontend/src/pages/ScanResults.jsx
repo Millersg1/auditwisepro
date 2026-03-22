@@ -38,6 +38,8 @@ function ScanResults() {
         res = await getPublicScan(id);
       }
       const scanData = res.data.scan || res.data;
+      const issuesData = res.data.issues || [];
+      scanData._issues = issuesData;
       setScan(scanData);
 
       // If scan is still running, poll every 3 seconds
@@ -116,7 +118,7 @@ function ScanResults() {
   }
 
   // Handle scan still in progress
-  if (scan.status === 'pending' || scan.status === 'scanning') {
+  if (scan.status === 'pending' || scan.status === 'running') {
     return (
       <div className="loading-container" style={{ minHeight: '60vh' }}>
         <div className="spinner" />
@@ -129,15 +131,15 @@ function ScanResults() {
     );
   }
 
-  const results = scan.results || {};
+  const allIssues = scan._issues || [];
   const categories = {
-    seo: { label: 'SEO', score: results.seo?.score ?? 0, issues: results.seo?.issues || [] },
-    security: { label: 'Security', score: results.security?.score ?? 0, issues: results.security?.issues || [] },
-    performance: { label: 'Performance', score: results.performance?.score ?? 0, issues: results.performance?.issues || [] },
-    accessibility: { label: 'Accessibility', score: results.accessibility?.score ?? 0, issues: results.accessibility?.issues || [] },
+    seo: { label: 'SEO', score: scan.seo_score ?? 0, issues: allIssues.filter(i => i.category === 'seo') },
+    security: { label: 'Security', score: scan.security_score ?? 0, issues: allIssues.filter(i => i.category === 'security') },
+    performance: { label: 'Performance', score: scan.performance_score ?? 0, issues: allIssues.filter(i => i.category === 'performance') },
+    accessibility: { label: 'Accessibility', score: scan.accessibility_score ?? 0, issues: allIssues.filter(i => i.category === 'accessibility') },
   };
 
-  const overallScore = results.overall_score ?? Math.round(
+  const overallScore = scan.overall_score ?? Math.round(
     (categories.seo.score + categories.security.score + categories.performance.score + categories.accessibility.score) / 4
   );
 
