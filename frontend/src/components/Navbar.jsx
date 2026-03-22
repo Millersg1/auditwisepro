@@ -29,14 +29,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-inner container">
         <Link to="/" className="navbar-brand">
           <img src="/logo.png" alt="AuditWise Pro" className="brand-logo" />
           <span className="brand-text">AuditWise Pro</span>
         </Link>
 
-        <button className="navbar-toggle" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className="navbar-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}>
           {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
 

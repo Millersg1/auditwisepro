@@ -111,12 +111,14 @@ function LandingPage() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   disabled={scanning}
+                  aria-label="Website URL to audit"
                 />
               </div>
               <button
                 type="submit"
                 className="btn btn-accent btn-lg hero-btn"
                 disabled={scanning}
+                aria-label="Start website audit scan"
               >
                 {scanning ? (
                   <>

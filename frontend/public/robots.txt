@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /superadmin
+Disallow: /settings
+Disallow: /account
+Disallow: /notifications
+Disallow: /api/
+
+Sitemap: https://auditwisepro.com/sitemap.xml

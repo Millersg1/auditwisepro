@@ -1,0 +1,13 @@
+{
+  "name": "AuditWise Pro",
+  "short_name": "AuditWise",
+  "description": "Website Audit & Compliance Management Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1F3A",
+  "theme_color": "#0B1F3A",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
