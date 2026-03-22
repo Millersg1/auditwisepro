@@ -180,28 +180,24 @@ function LandingPage() {
           <div className="features-grid">
             {[
               {
-                icon: <FiSearch size={28} />,
+                img: '/owl-seo.png',
                 title: 'SEO Audit',
                 desc: 'Analyze meta tags, headings, content structure, sitemaps, and on-page SEO factors to boost your search rankings.',
-                color: '#3182ce',
               },
               {
-                icon: <FiShield size={28} />,
+                img: '/owl-security.png',
                 title: 'Security Check',
                 desc: 'Detect SSL issues, mixed content, security headers, and vulnerabilities that could put your site at risk.',
-                color: '#38a169',
               },
               {
-                icon: <FiZap size={28} />,
+                img: '/owl-performance.png',
                 title: 'Performance Analysis',
                 desc: 'Measure load times, resource optimization, caching, and Core Web Vitals for a faster user experience.',
-                color: '#dd6b20',
               },
               {
-                icon: <FiEye size={28} />,
+                img: '/owl-accessibility.png',
                 title: 'Accessibility Review',
                 desc: 'Check WCAG compliance, alt text, ARIA labels, color contrast, and keyboard navigation support.',
-                color: '#805ad5',
               },
             ].map((feature, i) => (
               <motion.div
@@ -213,8 +209,8 @@ function LandingPage() {
                 variants={fadeUp}
                 custom={i}
               >
-                <div className="feature-icon" style={{ background: `${feature.color}15`, color: feature.color }}>
-                  {feature.icon}
+                <div className="feature-owl">
+                  <img src={feature.img} alt={feature.title} className="feature-owl-img" />
                 </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.desc}</p>
