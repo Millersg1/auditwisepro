@@ -112,13 +112,13 @@ export async function generateReport(req, res, next) {
       reportData.audit = auditResult.rows[0];
 
       const findingsResult = await pool.query(
-        'SELECT * FROM findings WHERE audit_id = $1 ORDER BY severity DESC',
+        'SELECT * FROM audit_findings WHERE audit_id = $1 ORDER BY severity DESC',
         [audit_id]
       );
       reportData.findings = findingsResult.rows;
 
       const risksResult = await pool.query(
-        'SELECT * FROM risks WHERE audit_id = $1 ORDER BY risk_level DESC',
+        'SELECT * FROM risk_assessments WHERE audit_id = $1 ORDER BY risk_score DESC',
         [audit_id]
       );
       reportData.risks = risksResult.rows;

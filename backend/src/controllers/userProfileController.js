@@ -136,10 +136,10 @@ export async function updatePreferences(req, res, next) {
 export async function getSessions(req, res, next) {
   try {
     const result = await pool.query(
-      `SELECT id, ip_address, user_agent, last_active, created_at
+      `SELECT id, ip_address, user_agent, last_active_at, created_at
        FROM user_sessions
        WHERE user_id = $1 AND expires_at > NOW()
-       ORDER BY last_active DESC`,
+       ORDER BY last_active_at DESC`,
       [req.user.id]
     );
 

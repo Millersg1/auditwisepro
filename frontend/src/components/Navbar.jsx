@@ -43,8 +43,8 @@ function Navbar() {
         <div className={`navbar-menu ${mobileOpen ? 'open' : ''}`}>
           {!user ? (
             <>
-              <a href="#features" className="navbar-link" onClick={() => setMobileOpen(false)}>Features</a>
-              <a href="#pricing" className="navbar-link" onClick={() => setMobileOpen(false)}>Pricing</a>
+              <a href="/#features" className="navbar-link" onClick={() => setMobileOpen(false)}>Features</a>
+              <a href="/#pricing" className="navbar-link" onClick={() => setMobileOpen(false)}>Pricing</a>
               <Link to="/about" className="navbar-link" onClick={() => setMobileOpen(false)}>About</Link>
               <Link to="/login" className="navbar-link" onClick={() => setMobileOpen(false)}>Login</Link>
               <Link to="/register" className="btn btn-accent btn-sm navbar-cta" onClick={() => setMobileOpen(false)}>

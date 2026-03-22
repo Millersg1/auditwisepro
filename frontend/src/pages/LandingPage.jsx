@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import {
   FiSearch, FiShield, FiZap, FiEye, FiArrowRight,
-  FiCheck, FiGlobe, FiLock, FiTrendingUp, FiLoader
+  FiCheck, FiGlobe, FiLoader
 } from 'react-icons/fi';
 import { createScan, createCheckoutSession } from '../services/api';
 import { useAuth } from '../context/AuthContext';

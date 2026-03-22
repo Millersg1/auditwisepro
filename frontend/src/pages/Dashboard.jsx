@@ -75,9 +75,8 @@ function Dashboard() {
   const totalScans = scans.length;
   const completedScans = scans.filter((s) => s.status === 'completed');
   const scores = completedScans.map((s) => {
-    const r = s.results || {};
-    return r.overall_score ?? Math.round(
-      ((r.seo?.score || 0) + (r.security?.score || 0) + (r.performance?.score || 0) + (r.accessibility?.score || 0)) / 4
+    return s.overall_score ?? Math.round(
+      ((s.seo_score || 0) + (s.security_score || 0) + (s.performance_score || 0) + (s.accessibility_score || 0)) / 4
     );
   }).filter(s => s > 0);
 

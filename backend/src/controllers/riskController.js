@@ -106,7 +106,7 @@ export async function getRisk(req, res, next) {
 // POST /api/risks — create a risk assessment
 export async function createRisk(req, res, next) {
   try {
-    const { title, description, category, likelihood, impact, status, mitigation, client_id, audit_id, owner, notes } = req.body;
+    const { title, description, category, likelihood, impact, status, mitigation_strategy, client_id, audit_id, owner_id, notes } = req.body;
 
     if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Risk title is required' });
@@ -122,11 +122,9 @@ export async function createRisk(req, res, next) {
       return res.status(400).json({ error: 'Impact must be between 1 and 5' });
     }
 
-    const riskScore = likelihoodVal * impactVal;
-
     const result = await pool.query(
-      `INSERT INTO risk_assessments (title, description, category, likelihood, impact, risk_score, status, mitigation, client_id, audit_id, owner, notes, organization_id, created_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+      `INSERT INTO risk_assessments (title, description, category, likelihood, impact, status, mitigation_strategy, client_id, audit_id, owner_id, notes, organization_id, created_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        RETURNING *`,
       [
         title.trim(),
@@ -134,12 +132,11 @@ export async function createRisk(req, res, next) {
         category || null,
         likelihoodVal,
         impactVal,
-        riskScore,
         status || 'identified',
-        mitigation || null,
+        mitigation_strategy || null,
         client_id || null,
         audit_id || null,
-        owner || null,
+        owner_id || null,
         notes || null,
         req.user.organization_id || null,
         req.user.id,
@@ -156,7 +153,7 @@ export async function createRisk(req, res, next) {
 export async function updateRisk(req, res, next) {
   try {
     const { id } = req.params;
-    const { title, description, category, likelihood, impact, status, mitigation, client_id, audit_id, owner, notes } = req.body;
+    const { title, description, category, likelihood, impact, status, mitigation_strategy, client_id, audit_id, owner_id, notes } = req.body;
     const scope = orgScope(req.user, 2);
 
     // Validate likelihood/impact if provided
@@ -173,7 +170,7 @@ export async function updateRisk(req, res, next) {
       }
     }
 
-    // Fetch current values to recalculate risk_score
+    // Fetch current values for likelihood/impact (risk_score is auto-generated)
     const current = await pool.query(
       `SELECT likelihood, impact FROM risk_assessments WHERE id = $1 AND ${scope.clause}`,
       [id, scope.value]
@@ -184,7 +181,6 @@ export async function updateRisk(req, res, next) {
 
     const newLikelihood = likelihood !== undefined ? parseInt(likelihood) : current.rows[0].likelihood;
     const newImpact = impact !== undefined ? parseInt(impact) : current.rows[0].impact;
-    const newRiskScore = newLikelihood * newImpact;
 
     const result = await pool.query(
       `UPDATE risk_assessments SET
@@ -193,17 +189,16 @@ export async function updateRisk(req, res, next) {
         category = COALESCE($3, category),
         likelihood = $4,
         impact = $5,
-        risk_score = $6,
-        status = COALESCE($7, status),
-        mitigation = COALESCE($8, mitigation),
-        client_id = COALESCE($9, client_id),
-        audit_id = COALESCE($10, audit_id),
-        owner = COALESCE($11, owner),
-        notes = COALESCE($12, notes),
+        status = COALESCE($6, status),
+        mitigation_strategy = COALESCE($7, mitigation_strategy),
+        client_id = COALESCE($8, client_id),
+        audit_id = COALESCE($9, audit_id),
+        owner_id = COALESCE($10, owner_id),
+        notes = COALESCE($11, notes),
         updated_at = NOW()
-       WHERE id = $13 AND ${orgScope(req.user, 14).clause}
+       WHERE id = $12 AND ${orgScope(req.user, 13).clause}
        RETURNING *`,
-      [title, description, category, newLikelihood, newImpact, newRiskScore, status, mitigation, client_id, audit_id, owner, notes, id, orgScope(req.user, 14).value]
+      [title, description, category, newLikelihood, newImpact, status, mitigation_strategy, client_id, audit_id, owner_id, notes, id, orgScope(req.user, 13).value]
     );
 
     if (result.rows.length === 0) {

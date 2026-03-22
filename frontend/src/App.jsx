@@ -48,6 +48,7 @@ import SuperAdminUserDetail from './pages/SuperAdminUserDetail';
 import SuperAdminOrganizations from './pages/SuperAdminOrganizations';
 import SuperAdminSettings from './pages/SuperAdminSettings';
 import SuperAdminRevenue from './pages/SuperAdminRevenue';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -107,6 +108,11 @@ function App() {
           <Route path="/superadmin/settings" element={<SuperAdminSettings />} />
           <Route path="/superadmin/revenue" element={<SuperAdminRevenue />} />
         </Route>
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<Layout />}>
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

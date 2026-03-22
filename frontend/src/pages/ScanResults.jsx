@@ -22,36 +22,41 @@ function ScanResults() {
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
-    fetchScan();
-  }, [id]);
+    let cancelled = false;
+    let timer;
 
-  const fetchScan = async () => {
-    try {
-      let res;
-      if (user) {
-        try {
-          res = await getScan(id);
-        } catch {
+    const fetchScan = async () => {
+      try {
+        let res;
+        if (user) {
+          try {
+            res = await getScan(id);
+          } catch {
+            res = await getPublicScan(id);
+          }
+        } else {
           res = await getPublicScan(id);
         }
-      } else {
-        res = await getPublicScan(id);
-      }
-      const scanData = res.data.scan || res.data;
-      const issuesData = res.data.issues || [];
-      scanData._issues = issuesData;
-      setScan(scanData);
+        if (cancelled) return;
+        const scanData = res.data.scan || res.data;
+        const issuesData = res.data.issues || [];
+        scanData._issues = issuesData;
+        setScan(scanData);
 
-      // If scan is still running, poll every 3 seconds
-      if (scanData.status === 'pending' || scanData.status === 'running') {
-        setTimeout(fetchScan, 3000);
+        // If scan is still running, poll every 3 seconds
+        if (scanData.status === 'pending' || scanData.status === 'running') {
+          timer = setTimeout(fetchScan, 3000);
+        }
+      } catch (err) {
+        if (!cancelled) toast.error('Failed to load scan results');
+      } finally {
+        if (!cancelled) setLoading(false);
       }
-    } catch (err) {
-      toast.error('Failed to load scan results');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    fetchScan();
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [id]);
 
   const toggleIssue = (idx) => {
     setExpandedIssues((prev) => ({ ...prev, [idx]: !prev[idx] }));

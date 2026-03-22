@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import NotificationBell from './NotificationBell';
 import {
-  FiGrid, FiSearch, FiPlusCircle, FiSettings, FiShield,
+  FiGrid, FiSearch, FiSettings, FiShield,
   FiLogOut, FiMenu, FiX, FiChevronLeft, FiUsers, FiClipboard,
   FiFileText, FiAlertTriangle, FiCheckSquare, FiBarChart2,
   FiFolder, FiEdit3, FiBell, FiUser, FiZap, FiGlobe, FiDollarSign, FiTool
