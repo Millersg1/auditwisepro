@@ -73,8 +73,8 @@ function Privacy() {
         </p>
         <p style={{ marginTop: 8 }}>
           Email:{' '}
-          <a href="mailto:privacy@auditwisepro.com" style={{ color: 'var(--accent)' }}>
-            privacy@auditwisepro.com
+          <a href="mailto:support@auditwisepro.com" style={{ color: 'var(--accent)' }}>
+            support@auditwisepro.com
           </a>
           <br />
           Or visit our <Link to="/contact" style={{ color: 'var(--accent)' }}>Contact Page</Link>.

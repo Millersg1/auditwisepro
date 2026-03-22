@@ -117,7 +117,7 @@ export async function sendContactNotification(name, email, message) {
 
   await transporter.sendMail({
     from: process.env.SMTP_FROM || 'AuditWise Pro <noreply@auditwisepro.com>',
-    to: process.env.ADMIN_NOTIFICATION_EMAIL || 'admin@auditwisepro.com',
+    to: process.env.ADMIN_NOTIFICATION_EMAIL || 'support@auditwisepro.com',
     subject: `Contact Form: ${name}`,
     html,
   });

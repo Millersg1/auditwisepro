@@ -55,8 +55,8 @@ function AcceptableUse() {
         </h2>
         <p>
           If you become aware of any misuse of the Service or violations of this policy, please report it to{' '}
-          <a href="mailto:abuse@auditwisepro.com" style={{ color: 'var(--accent)' }}>
-            abuse@auditwisepro.com
+          <a href="mailto:support@auditwisepro.com" style={{ color: 'var(--accent)' }}>
+            support@auditwisepro.com
           </a>. We take all reports seriously and will investigate promptly.
         </p>
 
