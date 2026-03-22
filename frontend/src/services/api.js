@@ -54,7 +54,7 @@ export const changePassword = (data) => api.put('/auth/change-password', data);
 export const createScan = (data) => api.post('/scans', data);
 export const getScans = (params) => api.get('/scans', { params });
 export const getScan = (id) => api.get(`/scans/${id}`);
-export const getPublicScan = (id) => api.get(`/scans/public/${id}`);
+export const getPublicScan = (id) => api.get(`/scans/${id}/public`);
 export const deleteScan = (id) => api.delete(`/scans/${id}`);
 export const downloadPDF = (id) => api.get(`/scans/${id}/pdf`, { responseType: 'blob' });
 
