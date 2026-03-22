@@ -39,6 +39,21 @@
   color: var(--accent-light);
 }
 
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-legal a {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  transition: var(--transition);
+}
+
+.footer-legal a:hover {
+  color: var(--accent-light);
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;

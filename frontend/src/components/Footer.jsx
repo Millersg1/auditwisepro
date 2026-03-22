@@ -13,6 +13,11 @@ function Footer() {
           <Link to="/">Home</Link>
           <a href="/#features">Features</a>
           <a href="/#pricing">Pricing</a>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <div className="footer-legal">
+          <Link to="/terms">Terms of Service</Link>
+          <Link to="/privacy">Privacy Policy</Link>
         </div>
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} AuditWise Pro. All rights reserved.</p>
