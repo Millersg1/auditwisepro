@@ -1,0 +1,131 @@
+.about-page {
+  min-height: 100%;
+}
+
+.about-hero {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 20px 60px;
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.about-hero p {
+  font-size: 1.15rem;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.about-section h2 {
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.about-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.4rem;
+}
+
+.about-card h3 {
+  font-size: 1.05rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.about-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.about-cta {
+  background: var(--bg-light);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.about-cta h2 {
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.about-cta p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-size: 1rem;
+}
+
+.about-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .about-hero {
+    padding: 60px 20px 40px;
+  }
+
+  .about-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-section {
+    padding: 40px 20px;
+  }
+
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+}

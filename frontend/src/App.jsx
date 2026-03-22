@@ -14,6 +14,10 @@ import ScanResults from './pages/ScanResults';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Contact from './pages/Contact';
+import RefundPolicy from './pages/RefundPolicy';
+import CookiePolicy from './pages/CookiePolicy';
+import AcceptableUse from './pages/AcceptableUse';
+import About from './pages/About';
 
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
@@ -60,6 +64,10 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/acceptable-use" element={<AcceptableUse />} />
+        <Route path="/about" element={<About />} />
       </Route>
 
       {/* Protected dashboard routes */}
